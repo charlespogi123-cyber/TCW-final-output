@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Where Growth Meets Sustainability: An Evidence-Based Framework for Data Center and AI Infrastructure Development in the Philippines</title>
+<meta name="description" content="How the Philippines can join the global AI buildout without letting data centres outrun its grid, its water, and its communities.">
+<meta name="theme-color" content="#f5f2ea" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1a1c" media="(prefers-color-scheme: dark)">
+<script>try{var s=localStorage.getItem('theme');if(s==='light'||s==='dark')document.documentElement.setAttribute('data-theme',s)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* ---------- Tokens ---------- */
+:root{
+  --bg:#f5f2ea;--bg2:#ece7da;--card:#fffdf8;--ink:#0f2e2d;--mut:#55625f;--line:#ddd6c6;--line2:#e9e3d5;
+  --aqua:#0a6f7b;--aqua-soft:rgba(10,111,123,.1);--heat:#d4870a;--heat-ink:#8a5300;--heat-soft:rgba(212,135,10,.12);
+  --shadow:0 1px 2px rgba(15,46,45,.05),0 8px 24px -12px rgba(15,46,45,.18);
+  --f-display:"Fraunces",Georgia,serif;--f-ui:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--f-body:"Source Serif 4",Georgia,serif;
+  --r:14px;--ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:light;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0b1a1c;--bg2:#0f2326;--card:#112a2d;--ink:#e7efe9;--mut:#9db3ae;--line:#24423f;--line2:#1a3436;
+  --aqua:#5cc8d2;--aqua-soft:rgba(92,200,210,.12);--heat:#f2b441;--heat-ink:#f2b441;--heat-soft:rgba(242,180,65,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 30px -14px rgba(0,0,0,.6);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0b1a1c;--bg2:#0f2326;--card:#112a2d;--ink:#e7efe9;--mut:#9db3ae;--line:#24423f;--line2:#1a3436;
+  --aqua:#5cc8d2;--aqua-soft:rgba(92,200,210,.12);--heat:#f2b441;--heat-ink:#f2b441;--heat-soft:rgba(242,180,65,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 30px -14px rgba(0,0,0,.6);color-scheme:dark}
+
+/* ---------- Base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 1.5rem);-webkit-text-size-adjust:100%}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.75 var(--f-body);font-optical-sizing:auto;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom,0px);transition:background-color .4s,color .4s}
+::selection{background:var(--heat);color:#10302f}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.12;letter-spacing:-.015em;text-wrap:balance}
+p,li{text-wrap:pretty}
+a{color:var(--aqua);text-decoration-thickness:1px;text-underline-offset:3px;transition:color .2s}
+a:hover{color:var(--heat-ink)}
+:focus-visible{outline:3px solid var(--heat);outline-offset:3px;border-radius:4px}
+h1:focus{outline:none}
+strong{font-weight:600}
+.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--card);padding:.6rem 1rem;border-radius:8px;z-index:20;box-shadow:var(--shadow)}
+.wrap{max-width:74rem;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.5rem)}
+.meta{color:var(--mut);font:500 .9rem/1.5 var(--f-ui)}
+.kicker{display:inline-flex;line-height:1.4!important;align-items:center;gap:.55rem;font:600 .78rem/1 var(--f-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--aqua)}
+.kicker::before{content:"";width:1.6rem;height:2px;background:currentColor}
+
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* ---------- Progress + top controls ---------- */
+#pg{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:3px;background:linear-gradient(90deg,var(--aqua),var(--heat));transform:scaleX(0);transform-origin:left;z-index:15}
+.ctl{position:fixed;right:clamp(.8rem,2vw,1.5rem);z-index:14;display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 85%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--ink);cursor:pointer;box-shadow:var(--shadow);transition:transform .25s var(--ease),opacity .3s,background .2s}
+.ctl:hover{transform:translateY(-2px)}.ctl:active{transform:scale(.94)}
+.ctl svg{width:1.2rem;height:1.2rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#theme{top:calc(env(safe-area-inset-top,0px) + 1rem)}
+#top{bottom:calc(env(safe-area-inset-bottom,0px) + 1.2rem);opacity:0;pointer-events:none;transform:translateY(10px)}
+#top.show{opacity:1;pointer-events:auto;transform:none}
+#theme .i-sun,#theme .i-moon,#theme .i-auto{display:none}
+:root[data-theme="light"] #theme .i-sun,:root[data-theme="dark"] #theme .i-moon,:root[data-theme="auto"] #theme .i-auto{display:block}
+
+/* ---------- Hero ---------- */
+header{position:relative;overflow:hidden;padding:clamp(3.5rem,9vw,6.5rem) 0 clamp(2.5rem,6vw,4rem);border-bottom:1px solid var(--line)}
+header::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(60rem 30rem at 85% -10%,var(--aqua-soft),transparent 60%),radial-gradient(40rem 26rem at -5% 110%,var(--heat-soft),transparent 60%),
+  linear-gradient(var(--line2) 1px,transparent 1px) 0 0/44px 44px,linear-gradient(90deg,var(--line2) 1px,transparent 1px) 0 0/44px 44px;
+  -webkit-mask-image:linear-gradient(180deg,#000 40%,transparent);mask-image:linear-gradient(180deg,#000 40%,transparent)}
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem);align-items:end}
+h1{font-size:clamp(2.1rem,5.2vw,3.9rem);font-weight:500;margin:1.1rem 0 1.4rem;letter-spacing:-.025em;font-variation-settings:"opsz" 144}
+h1 em{font-style:normal;color:var(--aqua);background:linear-gradient(transparent 68%,var(--heat-soft) 68%)}
+h1 .sub{display:block;margin-top:.9rem;font:500 clamp(1.05rem,1.8vw,1.3rem)/1.4 var(--f-ui);letter-spacing:-.005em;color:var(--mut);max-width:38rem}
+.lede{font-size:clamp(1.15rem,1.8vw,1.35rem);line-height:1.6;max-width:36rem;margin:0 0 1.6rem}
+.by{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.by .av{width:2.4rem;height:2.4rem;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--bg);font:700 .85rem var(--f-ui)}
+.by b{display:block;font:600 .98rem/1.3 var(--f-ui);color:var(--ink)}
+.dl{display:inline-flex;align-items:center;gap:.5rem;margin-left:auto;padding:.65rem 1.1rem;border-radius:999px;background:var(--ink);color:var(--bg);font:600 .88rem/1 var(--f-ui);text-decoration:none;box-shadow:var(--shadow);transition:transform .25s var(--ease),background .2s,color .2s}
+.dl:hover{color:var(--bg);background:var(--aqua);transform:translateY(-2px)}.dl:active{transform:scale(.96)}
+.dl svg{width:1.05rem;height:1.05rem;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:34rem){.dl{margin-left:0;width:100%;justify-content:center}}
+@media print{.dl{display:none}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:2.2rem 0 0;padding:0;list-style:none;box-shadow:var(--shadow)}
+.stats li{background:var(--card);padding:1rem 1.1rem}
+.stats b{display:block;font:600 clamp(1.5rem,3vw,2.1rem)/1.1 var(--f-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stats li:nth-child(2) b{color:var(--heat-ink)}
+.stats span{display:block;margin-top:.3rem;font:500 .8rem/1.35 var(--f-ui);color:var(--mut)}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:calc(var(--r) + 4px);padding:1.3rem 1.3rem 1rem;box-shadow:var(--shadow);margin:0}
+.chart .kicker{margin-bottom:.6rem}
+.chart figcaption{border-top:1px dashed var(--line);padding-top:.8rem;margin-top:.4rem}
+svg text{fill:var(--ink);font:600 14px var(--f-ui)}
+.chart svg text{font-size:26px}
+
+/* ---------- Layout ---------- */
+.layout{display:grid;grid-template-columns:13.5rem minmax(0,47rem);gap:clamp(2rem,5vw,4.5rem);padding-top:clamp(2rem,5vw,3.5rem);padding-bottom:3rem;justify-content:center}
+.toc{position:sticky;top:2rem;align-self:start;max-height:calc(100vh - 4rem);overflow:auto;padding-top:3.2rem}
+.toc summary{list-style:none;cursor:pointer;font:600 .78rem/1 var(--f-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:.9rem}
+.toc summary::-webkit-details-marker{display:none}
+.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line);counter-reset:t}
+.toc li{counter-increment:t}
+.toc a{position:relative;display:flex;gap:.65rem;padding:.42rem 0 .42rem 1rem;margin-left:-1px;border-left:2px solid transparent;color:var(--mut);text-decoration:none;font:500 .9rem/1.35 var(--f-ui);transition:color .2s,border-color .3s,background .3s}
+.toc a::before{content:counter(t,decimal-leading-zero);font-variant-numeric:tabular-nums;color:var(--line);font-weight:600;transition:color .2s}
+.toc li:last-child a::before{content:"—"}
+.toc a:hover{color:var(--ink)}
+.toc a.act{color:var(--ink);border-left-color:var(--aqua);background:linear-gradient(90deg,var(--aqua-soft),transparent)}
+.toc a.act::before{color:var(--aqua)}
+
+/* ---------- Article ---------- */
+article{counter-reset:s;min-width:0}
+article>p,article>ul{margin:0 0 1.15rem}
+article ul{padding-left:1.1rem}
+article li{margin-bottom:.6rem}
+article li::marker{color:var(--aqua)}
+h2{counter-increment:s;position:relative;font-size:clamp(1.7rem,3.2vw,2.3rem);margin:4.5rem 0 1.1rem;padding-top:1.4rem}
+h2::before{content:counter(s,decimal-leading-zero);display:block;font:600 .8rem/1 var(--f-ui);letter-spacing:.14em;color:var(--aqua);margin-bottom:.8rem}
+h2#refs::before{content:"Sources"}
+h2::after{content:"";position:absolute;left:0;top:0;width:100%;height:1px;background:var(--line)}
+h2 span.u{position:absolute;left:0;top:-1px;height:3px;width:3.5rem;background:var(--aqua);border-radius:2px;transform-origin:left}
+article>h2:first-child{margin-top:0}
+h3{font-size:1.3rem;margin:2.2rem 0 .45rem;display:flex;gap:.7rem;align-items:baseline}
+h3 .num{flex:none;display:inline-grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--aqua-soft);color:var(--aqua);font:700 .9rem/1 var(--f-ui);transform:translateY(-.15rem)}
+.note{position:relative;border:1px solid var(--line);border-left:4px solid var(--heat);border-radius:0 var(--r) var(--r) 0;padding:1rem 1.25rem;background:var(--card);margin:1.6rem 0;box-shadow:var(--shadow);font-size:1rem}
+.note strong:first-child{display:block;font:600 .95rem/1.4 var(--f-ui);margin-bottom:.25rem;color:var(--heat-ink)}
+figure{margin:2rem 0}figcaption{font:500 .86rem/1.55 var(--f-ui);color:var(--mut)}
+.cyc{background:var(--card);border:1px solid var(--line);border-radius:calc(var(--r) + 4px);padding:1.4rem;box-shadow:var(--shadow)}
+.cyc .note{box-shadow:none;margin:1rem 0 0;min-height:4.2rem;transition:border-color .3s}
+.cyc .note.flash{animation:flash .5s var(--ease)}
+
+/* ---------- Tables ---------- */
+.tw{overflow-x:auto;margin:1.5rem 0;border:1px solid var(--line);border-radius:var(--r);background:var(--card);box-shadow:var(--shadow);-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:40rem;font-size:.92rem;line-height:1.5}
+caption{caption-side:top;text-align:left;padding:.9rem 1rem .2rem}
+th,td{padding:.75rem .85rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line2)}
+tbody tr:last-child>*{border-bottom:0}
+thead th{font:600 .74rem/1.3 var(--f-ui);letter-spacing:.08em;text-transform:uppercase;color:var(--mut);background:var(--bg2);border-bottom:1px solid var(--line)}
+tbody th{font:600 .95rem/1.35 var(--f-ui);min-width:8.5rem}
+.tw{background:linear-gradient(90deg,var(--card) 30%,transparent) left/2.5rem 100% no-repeat local,linear-gradient(270deg,var(--card) 30%,transparent) right/2.5rem 100% no-repeat local,radial-gradient(farthest-side at 0 50%,rgba(0,0,0,.14),transparent) left/.8rem 100% no-repeat scroll,radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.14),transparent) right/.8rem 100% no-repeat scroll,var(--card)}
+tbody tr{transition:background .2s}
+tbody tr:hover>*{background:var(--aqua-soft)}
+td.hl{background:var(--aqua-soft);box-shadow:inset 0 2px 0 var(--aqua)}
+.lv{display:flex;gap:3px;margin-bottom:.4rem}.lv i{width:22px;height:6px;border-radius:3px;background:var(--line)}
+.l1 i:nth-child(1),.l2 i:nth-child(-n+2),.l3 i{background:var(--aqua)}
+.l1 i:nth-child(1){background:var(--heat)}
+.rk{min-width:6.5rem;font:500 .85rem/1.4 var(--f-ui);color:var(--mut)}
+.rk span{display:block;font:600 1.8rem/1.1 var(--f-display);color:var(--ink);margin-bottom:.15rem}
+
+/* ---------- Controls ---------- */
+.sort{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:1.2rem 0 .4rem}
+.sort .meta{margin-right:.3rem}
+.btn,.sort button{font:600 .85rem/1 var(--f-ui);border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:.6rem 1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s var(--ease)}
+.sort button:hover{border-color:var(--aqua);transform:translateY(-1px)}
+.sort button:active{transform:scale(.96)}
+.sort button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+/* ---------- Loop diagram ---------- */
+.node{cursor:pointer;outline:none}
+.node circle{transition:fill .25s,stroke .25s,r .3s var(--ease)}
+.node .n,.node .lab{transition:fill .25s}
+.node:hover circle,.node.on circle,.node:focus-visible circle{fill:var(--aqua)}
+.node:hover .n,.node.on .n,.node:focus-visible .n{fill:var(--bg)}
+.node.on .lab,.node:hover .lab,.node:focus-visible .lab{fill:var(--aqua)}
+.node:focus-visible circle{stroke:var(--heat)}
+.orbit circle{fill:var(--heat)}
+
+/* ---------- References ---------- */
+.ref{position:relative;font-size:.92rem;line-height:1.55;padding:.7rem 0 .7rem 1.6rem;margin:0;border-bottom:1px solid var(--line2);overflow-wrap:anywhere}
+.ref::before{content:"";position:absolute;left:0;top:1.25rem;width:.55rem;height:.55rem;border-radius:2px;background:var(--aqua);opacity:.5}
+.ref a{color:var(--mut)}.ref a:hover{color:var(--aqua)}
+footer{border-top:1px solid var(--line);padding:2rem 0 3.5rem;color:var(--mut);font:500 .88rem/1.6 var(--f-ui)}
+footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+/* ---------- Motion ---------- */
+@media(prefers-reduced-motion:no-preference){
+  .rise{animation:rise .9s var(--ease) both;animation-delay:calc(var(--d,0) * 110ms)}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}}
+  h1 em{background-size:0 100%;background-repeat:no-repeat;background-image:linear-gradient(transparent 68%,var(--heat-soft) 68%);background-color:transparent;animation:mark 1s .7s var(--ease) forwards}
+  @keyframes mark{to{background-size:100% 100%}}
+  svg .bar{transform-box:fill-box;transform-origin:left center;animation:grow 1.2s var(--ease) .5s both}
+  svg .b2{animation-delay:.75s}svg .b3{animation-delay:1s}
+  header svg text{animation:fade .6s 1.5s both}
+  @keyframes grow{from{transform:scaleX(0)}}@keyframes fade{from{opacity:0}}
+  .flow{animation:dash 1.4s linear infinite}@keyframes dash{to{stroke-dashoffset:-18}}
+  .orbit{transform-box:view-box;transform-origin:260px 210px;animation:spin 9s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+  .node{transform-box:fill-box;transform-origin:center;transition:transform .3s var(--ease)}
+  .node:hover,.node:focus-visible{transform:scale(1.06)}
+  .node.on circle{animation:pulse 1.8s ease-out infinite}
+  @keyframes pulse{0%{stroke-width:3}50%{stroke-width:7}100%{stroke-width:3}}
+  @keyframes flash{from{opacity:.3;transform:translateY(6px)}}
+  .js .rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .js .rv.in{opacity:1;transform:none}
+  .js h2 span.u{transform:scaleX(0);transition:transform .9s var(--ease) .15s}
+  .js h2.in span.u{transform:scaleX(1)}
+  .js .lv i{transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+  .js .in .lv i{transform:scaleX(1)}.js .in .lv i:nth-child(2){transition-delay:.12s}.js .in .lv i:nth-child(3){transition-delay:.24s}
+  .js tbody tr.moved{animation:slot .45s var(--ease)}@keyframes slot{from{opacity:.2;transform:translateY(-6px)}}
+}
+
+/* ---------- Responsive ---------- */
+@media(max-width:60rem){
+  .hero{grid-template-columns:1fr;align-items:start}
+  .layout{grid-template-columns:minmax(0,44rem)}
+  .toc{position:static;max-height:none;padding:0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+  .toc summary{margin:0;padding:1rem 1.2rem;display:flex;justify-content:space-between}
+  .toc summary::after{content:"+";font-size:1.1rem;letter-spacing:0;transition:transform .25s}
+  .toc[open] summary::after{transform:rotate(45deg)}
+  .toc ol{margin:0 1.2rem 1rem}
+}
+@media(max-width:34rem){.stats{grid-template-columns:1fr}.stats li{display:flex;align-items:baseline;gap:.8rem}.stats span{margin:0}}
+@media print{#pg,.ctl,.toc,.sort{display:none}.layout{display:block}.js .rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="pg" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+<button class="ctl" id="theme" type="button" aria-label="Colour theme: automatic. Click to change.">
+<svg class="i-auto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4v16" /><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
+<svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+<svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+</button>
+<button class="ctl" id="top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+<header><div class="wrap hero">
+<div>
+<p class="kicker rise" style="--d:0">Final Output · Globalization issue · Term 1 AY 2026–2027</p>
+<h1 class="rise" style="--d:1">Where <em>Growth</em> Meets <em>Sustainability</em><span class="vh">: </span><span class="sub">An Evidence-Based Framework for Data Center and AI Infrastructure Development in the Philippines</span></h1>
+<p class="lede rise" style="--d:2">How the Philippines can join the global AI buildout without letting data centres outrun its grid, its water, and its communities.</p>
+<div class="by rise" style="--d:3"><span class="av" aria-hidden="true">CM</span><p class="meta" style="margin:0"><b>Charles Mikael Medel</b>Mapúa-Malayan Digital College</p><a class='dl' download='where-growth-meets-sustainability.html' href='/'><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download HTML</a></div>
+<ul class="stats rise" style="--d:4" aria-label="Key figures">
+<li><b data-count="50" data-suf=" MW">50 MW</b><span>AI-oriented capacity today</span></li>
+<li><b data-count="1.5" data-dec="1" data-suf=" GW">1.5 GW</b><span>Planned by 2033</span></li>
+<li><b data-count="34.4" data-dec="1" data-pre="US$" data-suf="B">US$34.4B</b><span>Estimated investment</span></li>
+</ul>
+</div>
+
+<figure class="chart rise" style="--d:3">
+<p class="kicker">Planned capacity</p>
+<svg viewBox="0 0 720 240" role="img" aria-labelledby="t d" width="100%">
+<title id="t">Planned growth in Philippine AI data-centre capacity</title>
+<desc id="d">Bars show 50 megawatts today, about 400 megawatts by 2030, and 1,500 megawatts by 2033.</desc>
+<rect class="bar" x="0" y="10" width="21" height="52" rx="6" fill="var(--aqua)"/><text x="36" y="45">50 MW baseline</text>
+<rect class="bar b2" x="0" y="90" width="171" height="52" rx="6" fill="var(--aqua)"/><text x="186" y="125">about 400 MW by 2030</text>
+<rect class="bar b3" x="0" y="170" width="720" height="52" rx="6" fill="var(--heat)"/><text x="18" y="205" style="fill:#10302f">1.5 GW by 2033: thirty times today</text>
+</svg>
+<figcaption>Targets from the DICT’s AI+ Infrastructure Masterplan 2026–2033 (Department of Information and Communications Technology [DICT], 2026; Philippine News Agency [PNA], 2026). These are plans, not results.</figcaption>
+</figure>
+</div></header>
+
+<main id="main" class="wrap layout">
+<details class="toc" open><summary>Contents</summary><nav aria-label="Contents"><ol>
+<li><a href="#issue">The issue</a></li><li><a href="#evidence">What the evidence shows</a></li><li><a href="#world">Three countries, three lessons</a></li><li><a href="#root">The root problem</a></li><li><a href="#solution">My solution: three safeguards</a></li><li><a href="#eval">Evaluating the solution</a></li><li><a href="#smart">Measures of success (SMART)</a></li><li><a href="#limits">Limits of this analysis</a></li><li><a href="#refs">References</a></li></ol></nav></details>
+<article>
+<h2 id="issue"><span class="u" aria-hidden="true"></span>The issue</h2>
+<p>AI runs on data centres, and data centres are being built wherever power, land, and policy allow. The Philippines wants a share: the DICT plans to grow AI-oriented capacity from about 50 megawatts to 1.5 gigawatts by 2033, with an estimated US$34.4 billion in investment (DICT, 2026; PNA, 2026). That is globalization in a concrete form: foreign capital, cloud demand, and a technology supply chain meeting a local grid and local water.</p>
+<p>The benefits are projections. The costs are physical. Large facilities need steady electricity and cooling, and where cooling uses water, they compete with households and farms. The question this paper answers is practical: <strong>how can the Philippines welcome the investment while making sure power, water, and host communities are protected?</strong></p>
+
+<h2 id="evidence"><span class="u" aria-hidden="true"></span>What the evidence shows</h2>
+<p>Three findings from elsewhere in Southeast Asia and Europe frame the Philippine choice. First, demand can concentrate fast. In Ireland, data centres in the Dublin and Meath region account for close to half of local electricity demand, which led to an effective pause on new grid connections (Mason Hayes &amp; Curran, 2026). Second, water becomes a bottleneck before it becomes a headline. Malaysia’s water regulator reported that data centres in Johor, Selangor, and Negeri Sembilan requested 808 million litres a day in 2024, and only 142.06 million litres a day were approved (Free Malaysia Today, 2025). Third, efficiency is a policy choice, not an accident. Singapore pays for scarce new capacity with strict conditions, which I compare below.</p>
+<div class="note"><strong>What this does and does not prove.</strong> These cases show that data-centre growth can strain grids and water, and that governments can set conditions. They do not prove the same outcome in the Philippines. Local data on each site is still needed.</div>
+
+<h2 id="world"><span class="u" aria-hidden="true"></span>Three countries, three lessons</h2>
+<div class="tw"><table>
+<caption class="meta">What each government required, and what Philippine policy can borrow</caption>
+<thead><tr><th scope="col">Country</th><th scope="col">What it did</th><th scope="col">Lesson for the Philippines</th></tr></thead>
+<tbody>
+<tr><th scope="row">Singapore</th><td>Allocates new capacity by competitive call. The second call required a PUE of 1.25, Green Mark Platinum, and at least 50% powered by eligible green pathways (Conventus Law, n.d.). A new law lets the regulator set water-efficiency requirements (Eco-Business, 2026).</td><td>Make capacity a reward for performance, and write efficiency promises into enforceable terms.</td></tr>
+<tr><th scope="row">Ireland</th><td>Ended its de facto grid pause with a policy that requires on-site or nearby generation, 80% renewable electricity procurement, a location-based grid check, and ongoing reporting (Mason Hayes &amp; Curran, 2026).</td><td>Tie a grid connection to the facility bringing its own clean supply, and check the location, not just the project.</td></tr>
+<tr><th scope="row">Malaysia (Johor)</th><td>Stopped approving Tier 1 and 2 data centres, which can use up to 50 million litres a day, required reclaimed water, and set a review involving 20 agencies (New Straits Times, 2025).</td><td>Decide the water source before approval, and coordinate agencies in one review.</td></tr>
+</tbody></table></div>
+<p>None of these thresholds should be copied number for number. Singapore has no large farming sector and Ireland has a very different grid. What transfers is the mechanism: conditions first, capacity second.</p>
+
+<h2 id="root"><span class="u" aria-hidden="true"></span>The root problem: rules that arrive after the buildings</h2>
+<p>The Philippine plan sets a capacity target, but the cases above show that results depend on rules written before construction. I define the root problem as a <strong>governance and information gap</strong>: cooling technology and clean-power options exist, yet I found no single published rule that ties capacity to verified water and power performance. <em>If such a rule exists, this gap narrows.</em> Five pieces of missing information matter most, and each has evidence behind it:</p>
+<ul>
+<li><strong>Facility-level water balance.</strong> In Malaysia, requests for 808 million litres a day were cut to 142.06 million approved (Free Malaysia Today, 2025), so planned demand and available water can diverge. DICT says modern data centres use water-recycling cooling (GMA News Online, 2026), but that is a design claim, not a site result.</li>
+<li><strong>Combined load in one corridor.</strong> Data centres in Dublin and Meath account for close to half of regional electricity demand (Mason Hayes &amp; Curran, 2026). DICT says its AI corridors were mapped to avoid crowding residents (Bilyonaryo News Channel, 2026), but the combined load of several campuses is not yet published.</li>
+<li><strong>Effects on host communities.</strong> Philippine reporting has raised concerns about energy-burdened households (Earth Journalism Network, 2026).</li>
+<li><strong>Actual renewable share.</strong> Some projects plan renewable-powered data centres (Philstar.com, 2026), while Ireland requires 80% renewable procurement for new connections (Mason Hayes &amp; Curran, 2026). A per-facility Philippine share is not yet set.</li>
+<li><strong>Who acts when plans fail.</strong> Johor coordinates one review across 20 agencies (New Straits Times, 2025). I found no equivalent single review for Philippine data centres.</li>
+</ul>
+
+<h2 id="solution"><span class="u" aria-hidden="true"></span>My solution: three safeguards, one feedback loop</h2>
+<p>The three safeguards close the gaps above, and they are built to work together.</p>
+<h3><span class="num" aria-hidden="true">1</span><span class="vh">1. </span>Meaningful participation of communities and local governments</h3>
+<p>Host communities and LGUs get plain-language information on expected water and power use before approval, a defined way to raise concerns, and a written response on record. This continues through construction and operation.</p>
+<h3><span class="num" aria-hidden="true">2</span><span class="vh">2. </span>Project-specific assessment and continuous monitoring</h3>
+<p>Each campus is assessed for water source and balance, power demand and renewable share, heat, land use, and combined effects with nearby sites. Baselines come before construction; actual use is compared with the plan, and large gaps trigger corrective action.</p>
+<h3><span class="num" aria-hidden="true">3</span><span class="vh">3. </span>Facility-level water, energy, and renewable requirements</h3>
+<p>Before operating, each facility files a plan naming its water source (reclaimed or non-potable first, as in Johor), design targets for PUE and water-use effectiveness, and its contracted renewable share. Targets cover both the share recycled and total freshwater used, and are set per site, not copied from abroad.</p>
+<h3>How they connect</h3>
+<figure class="cyc"><svg viewBox="0 0 520 430" role="group" aria-label="Feedback loop with five steps. Select a step for details." width="100%" style="max-width:34rem;display:block;margin:0 auto"><circle class="flow" cx="260" cy="210" r="130" fill="none" stroke="var(--aqua)" stroke-width="3" stroke-dasharray="9 9" opacity=".55"/><g class="orbit" aria-hidden="true"><circle cx="260" cy="80" r="6"/></g><text x="260" y="205" text-anchor="middle" style="font-size:20px">Evidence</text><text x="260" y="231" text-anchor="middle" style="font-size:20px">loop</text><g class="node" role="button" tabindex="0" data-i="1" aria-label="Step 1: Assess"><circle cx="260" cy="80" r="26" fill="var(--card)" stroke="var(--aqua)" stroke-width="3"/><text class="n" x="260" y="80" dy=".35em" text-anchor="middle" style="font-size:20px">1</text><text class="lab" x="260" y="38" text-anchor="middle" style="font-size:17px">Assess</text></g><g class="node" role="button" tabindex="0" data-i="2" aria-label="Step 2: Set limits"><circle cx="383.6" cy="169.8" r="26" fill="var(--card)" stroke="var(--aqua)" stroke-width="3"/><text class="n" x="383.6" y="169.8" dy=".35em" text-anchor="middle" style="font-size:20px">2</text><text class="lab" x="422" y="175" text-anchor="start" style="font-size:17px">Set limits</text></g><g class="node" role="button" tabindex="0" data-i="3" aria-label="Step 3: Hear communities"><circle cx="336.4" cy="315.2" r="26" fill="var(--card)" stroke="var(--aqua)" stroke-width="3"/><text class="n" x="336.4" y="315.2" dy=".35em" text-anchor="middle" style="font-size:20px">3</text><text class="lab" x="336" y="370" text-anchor="middle" style="font-size:17px">Hear communities</text></g><g class="node" role="button" tabindex="0" data-i="4" aria-label="Step 4: Monitor"><circle cx="183.6" cy="315.2" r="26" fill="var(--card)" stroke="var(--aqua)" stroke-width="3"/><text class="n" x="183.6" y="315.2" dy=".35em" text-anchor="middle" style="font-size:20px">4</text><text class="lab" x="184" y="370" text-anchor="middle" style="font-size:17px">Monitor</text></g><g class="node" role="button" tabindex="0" data-i="5" aria-label="Step 5: Correct"><circle cx="136.4" cy="169.8" r="26" fill="var(--card)" stroke="var(--aqua)" stroke-width="3"/><text class="n" x="136.4" y="169.8" dy=".35em" text-anchor="middle" style="font-size:20px">5</text><text class="lab" x="98" y="175" text-anchor="end" style="font-size:17px">Correct</text></g></svg><figcaption>Each pass updates the next: monitoring results feed the following assessment. Select a step to read what happens there.</figcaption><p id="step" class="note" aria-live="polite"><strong>Select a step</strong>Tap or press Enter on any numbered step in the loop.</p></figure>
+<p><strong>Enforcement.</strong> To give the loop teeth, capacity is released in tranches (for example, 100 MW at a time). The next tranche opens only after the previous one meets its published conditions, much as Singapore awards new capacity by competitive call (Conventus Law, n.d.).</p>
+
+<h2 id="eval"><span class="u" aria-hidden="true"></span>Evaluating the solution</h2>
+<p>Each part is rated Low, Moderate, or High on the four class criteria. The ratings are my own judgment from the evidence above, not measured results. Rank adds the four ratings.</p>
+<div class="sort" role="group" aria-label="Sort the ratings"><span class="meta">Sort by:</span> <button type="button" data-k="0" aria-pressed="true">Rank</button><button type="button" data-k="1" aria-pressed="false">Effectiveness</button><button type="button" data-k="2" aria-pressed="false">Feasibility</button><button type="button" data-k="3" aria-pressed="false">Ethical and Legal</button><button type="button" data-k="4" aria-pressed="false">Stakeholder</button></div>
+<div class="tw"><table>
+<thead><tr><th scope="col">Part of the solution</th><th scope="col">Effectiveness and Sustainability</th><th scope="col">Feasibility</th><th scope="col">Ethical and Legal Soundness</th><th scope="col">Stakeholder Acceptability</th><th scope="col">Rank</th></tr></thead>
+<tbody><tr><th scope="row">Participation of communities and LGUs</th><td><div class="lv l2" aria-hidden="true"><i></i><i></i><i></i></div><strong>Moderate</strong><br>Improves accountability if people can influence decisions.</td><td><div class="lv l3" aria-hidden="true"><i></i><i></i><i></i></div><strong>High</strong><br>Low cost; uses existing LGU channels.</td><td><div class="lv l3" aria-hidden="true"><i></i><i></i><i></i></div><strong>High</strong><br>Protects people’s right to be informed.</td><td><div class="lv l3" aria-hidden="true"><i></i><i></i><i></i></div><strong>High</strong><br>Answers concerns already reported (Earth Journalism Network, 2026).</td><td class="rk"><span>1st</span>Most feasible, most accepted</td></tr><tr><th scope="row">Assessment and monitoring</th><td><div class="lv l3" aria-hidden="true"><i></i><i></i><i></i></div><strong>High</strong><br>Fills the information gap and sets baselines.</td><td><div class="lv l2" aria-hidden="true"><i></i><i></i><i></i></div><strong>Moderate</strong><br>Needs technical staff and data.</td><td><div class="lv l3" aria-hidden="true"><i></i><i></i><i></i></div><strong>High</strong><br>Evidence-based and applied equally.</td><td><div class="lv l2" aria-hidden="true"><i></i><i></i><i></i></div><strong>Moderate</strong><br>Accepted if independent and timely.</td><td class="rk"><span>2nd</span>Needs capacity</td></tr><tr><th scope="row">Water, energy, and renewable requirements</th><td><div class="lv l3" aria-hidden="true"><i></i><i></i><i></i></div><strong>High</strong><br>Directly limits water and power use.</td><td><div class="lv l2" aria-hidden="true"><i></i><i></i><i></i></div><strong>Moderate</strong><br>Proven abroad; needs local calibration.</td><td><div class="lv l2" aria-hidden="true"><i></i><i></i><i></i></div><strong>Moderate</strong><br>Needs a legal basis; Singapore passed a new law (Eco-Business, 2026).</td><td><div class="lv l2" aria-hidden="true"><i></i><i></i><i></i></div><strong>Moderate</strong><br>Clear rules help operators, but costs may rise.</td><td class="rk"><span>3rd</span>Needs a legal basis</td></tr><tr><th scope="row">Tranche release (enforcement)</th><td><div class="lv l3" aria-hidden="true"><i></i><i></i><i></i></div><strong>High</strong><br>Keeps promises accountable over time.</td><td><div class="lv l1" aria-hidden="true"><i></i><i></i><i></i></div><strong>Low</strong><br>Needs an auditor and the will to delay a tranche.</td><td><div class="lv l3" aria-hidden="true"><i></i><i></i><i></i></div><strong>High</strong><br>Fair if conditions are published in advance.</td><td><div class="lv l1" aria-hidden="true"><i></i><i></i><i></i></div><strong>Low</strong><br>A delay is costly for investors.</td><td class="rk"><span>4th</span>Hardest to carry out</td></tr></tbody></table></div>
+<p><strong>Trade-off.</strong> The strongest check on accountability, holding back a tranche, is also the hardest to carry out. That is why it depends on conditions published in advance, so a delay is a rule being applied and not a surprise.</p>
+
+<h2 id="smart"><span class="u" aria-hidden="true"></span>Measures of success (SMART)</h2>
+<p>These are proposed targets. They are specific, measurable, and dated, and the numbers should be calibrated with agencies before adoption.</p>
+<div class="tw"><table>
+<thead><tr><th scope="col">Measure</th><th scope="col">Target and deadline</th><th scope="col">Why achievable and relevant</th><th scope="col">Owner</th></tr></thead>
+<tbody>
+<tr><th scope="row">Disclosure rule</th><td>A joint rule requiring facilities above a set size to publish monthly water use, power use, and renewable share, issued by December 2027</td><td>Disclosure is low cost, and it is the base for every other measure</td><td>DICT with DOE and DENR</td></tr>
+<tr><th scope="row">Water plans before power-on</th><td>100% of facilities in the first tranche have an approved water balance with a stated source before energizing, by 2029</td><td>Mirrors Johor’s source-first rule on a Philippine timeline</td><td>DENR and host LGU</td></tr>
+<tr><th scope="row">Renewable share</th><td>New facilities source at least 50% renewable electricity, rising to 80% by 2033</td><td>Between Singapore’s 50% green-pathway floor and Ireland’s 80% procurement rule</td><td>DOE</td></tr>
+<tr><th scope="row">Efficiency</th><td>New facilities meet a PUE of 1.3 or better at full load by 2030, adjusted if local conditions justify</td><td>Singapore’s long-run aim is 1.3, and its new-capacity calls required 1.25 (Conventus Law, n.d.)</td><td>DICT</td></tr>
+<tr><th scope="row">Community response</th><td>Host LGUs receive project information at least 90 days before approval; at least 90% of filed concerns get a written response within 60 days, starting 2028</td><td>Gives communities a measurable, trackable guarantee</td><td>DICT and host LGU</td></tr>
+</tbody></table></div>
+
+<h2 id="limits"><span class="u" aria-hidden="true"></span>Limits of this analysis</h2>
+<p>This paper relies on published reporting and policy documents. I did not find Philippine site-level water and power data for the planned campuses, so the thresholds proposed here (PUE, renewable share, tranche size) are starting points to be calibrated with DICT, DOE, and DENR. The comparisons draw on Singapore, Ireland, and Malaysia, whose grids, water systems, and laws differ from the Philippines. I could not confirm whether existing Philippine law already covers some of these requirements, which is where a legal review would begin.</p>
+
+<h2 id="refs"><span class="u" aria-hidden="true"></span>References</h2>
+<p class="ref">Bilyonaryo News Channel. (2026, October 3). <em>Power, water, land: DICT maps AI corridors for tech giants sans crowding locals.</em> <a href="https://bnc.bilyonaryo.com/power-water-land-dict-maps-ai-corridors-for-tech-giants-sans-crowding-locals/business/" rel="noopener" target="_blank">https://bnc.bilyonaryo.com/power-water-land-dict-maps-ai-corridors-for-tech-giants-sans-crowding-locals/business/</a></p>
+<p class="ref">Conventus Law. (n.d.). <em>Singapore’s second data centre call for application (DC-CFA2): Key takeaways.</em> <a href="https://conventuslaw.com/?p=131795" rel="noopener" target="_blank">https://conventuslaw.com/?p=131795</a></p>
+<p class="ref">Department of Information and Communications Technology. (2026, September 8). <em>Philippines AI+ Infrastructure Masterplan 2026–2033.</em> <a href="https://www.dict.gov.ph" rel="noopener" target="_blank">https://www.dict.gov.ph</a></p>
+<p class="ref">Earth Journalism Network. (2026, January 12). <em>Data centers raise concerns for energy-burdened households in the Philippines.</em> <a href="https://earthjournalism.net/stories/data-centers-raise-concerns-for-energy-burdened-households-in-the-philippines" rel="noopener" target="_blank">https://earthjournalism.net/stories/data-centers-raise-concerns-for-energy-burdened-households-in-the-philippines</a></p>
+<p class="ref">Eco-Business. (2026). <em>Singapore sets Southeast Asia’s first binding data centre rules, building demand for clean energy.</em> <a href="https://www.eco-business.com/news/singapore-sets-southeast-asias-first-binding-data-centre-rules-building-demand-for-clean-energy/" rel="noopener" target="_blank">https://www.eco-business.com/news/singapore-sets-southeast-asias-first-binding-data-centre-rules-building-demand-for-clean-energy/</a></p>
+<p class="ref">GMA News Online. (2026, July 30). <em>Amid Pax Silica concerns, DICT says modern data centers use water-recycling as cooling tech.</em> <a href="https://www.gmanetwork.com/news/money/companies/996709/amid-pax-silica-concerns-dict-says-modern-data-centers-use-water-recycling-as-cooling-tech/story/" rel="noopener" target="_blank">https://www.gmanetwork.com/news/money/companies/996709/amid-pax-silica-concerns-dict-says-modern-data-centers-use-water-recycling-as-cooling-tech/story/</a></p>
+<p class="ref">Free Malaysia Today. (2025, February 10). <em>Only 18% of data centres’ request for water approved last year.</em> <a href="https://www.freemalaysiatoday.com/category/nation/2025/02/10/only-18-of-data-centres-request-for-water-approved-last-year" rel="noopener" target="_blank">https://www.freemalaysiatoday.com/category/nation/2025/02/10/only-18-of-data-centres-request-for-water-approved-last-year</a></p>
+<p class="ref">Mason Hayes &amp; Curran. (2026, January). <em>CRU sets new criteria for data centre connections: New large energy user / data centre grid connection policy</em> [Energy update]. <a href="https://www.mhc.ie/uploads/documents/MHC-LEU-Policy-White-Paper-1.pdf" rel="noopener" target="_blank">https://www.mhc.ie/uploads/documents/MHC-LEU-Policy-White-Paper-1.pdf</a></p>
+<p class="ref">New Straits Times. (2025, November 27). <em>Johor tightens approvals for data centres.</em> <a href="https://www.nst.com.my/amp/news/nation/2025/11/1324188/johor-tightens-approvals-data-centres" rel="noopener" target="_blank">https://www.nst.com.my/amp/news/nation/2025/11/1324188/johor-tightens-approvals-data-centres</a></p>
+<p class="ref">Philstar.com. (2026, October 1). <em>MGEN, VITRO to build RE-powered data centers.</em> <a href="https://www.philstar.com/business/2026/10/01/2560060/mgen-vitro-build-re-powered-data-centers" rel="noopener" target="_blank">https://www.philstar.com/business/2026/10/01/2560060/mgen-vitro-build-re-powered-data-centers</a></p>
+<p class="ref">Philippine News Agency. (2026, September 8). <em>PH unveils $34-B roadmap to become ASEAN AI hub.</em> <a href="https://www.pna.gov.ph/articles/1283577" rel="noopener" target="_blank">https://www.pna.gov.ph/articles/1283577</a></p>
+
+</article>
+</main>
+<footer><div class="wrap"><span>Charles Mikael Medel · Mapúa-Malayan Digital College</span><span>Final Output · Term 1 AY 2026–2027 · <a download='where-growth-meets-sustainability.html' href='/'>Download this page (HTML)</a></span></div></footer>
+<script>(function(){
+var d=document.documentElement,q=function(x,r){return (r||document).querySelectorAll(x)},RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+d.classList.add('js');
+
+/* Theme toggle: auto -> light -> dark */
+var tb=document.getElementById('theme'),order=['auto','light','dark'],names={auto:'automatic',light:'light',dark:'dark'};
+function setT(m){d.setAttribute('data-theme',m);tb.setAttribute('aria-label','Colour theme: '+names[m]+'. Click to change.');try{m==='auto'?localStorage.removeItem('theme'):localStorage.setItem('theme',m)}catch(e){}}
+setT(d.getAttribute('data-theme')||'auto');
+tb.addEventListener('click',function(){setT(order[(order.indexOf(d.getAttribute('data-theme'))+1)%3])});
+
+/* Progress bar + back to top */
+var pg=document.getElementById('pg'),top=document.getElementById('top'),tick=false;
+function u(){tick=false;var m=d.scrollHeight-d.clientHeight,y=d.scrollTop;pg.style.transform='scaleX('+(m>0?y/m:0)+')';top.classList.toggle('show',y>innerHeight*.9)}
+addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(u)}},{passive:true});u();
+top.addEventListener('click',function(){scrollTo({top:0,behavior:RM?'auto':'smooth'});document.querySelector('h1').focus({preventScroll:true})});
+document.querySelector('h1').setAttribute('tabindex','-1');
+
+/* Collapse contents on small screens */
+var toc=document.querySelector('.toc'),mq=matchMedia('(max-width:60rem)');function tc(){toc.open=!mq.matches}tc();mq.addEventListener&&mq.addEventListener('change',tc);
+q('.toc a').forEach(function(a){a.addEventListener('click',function(){if(mq.matches)toc.open=false})});
+
+/* Scroll reveal */
+var art=document.querySelector('article');
+q('article > p, article > ul, article > h3, article > .note, article > .tw, article > figure, article > .sort',art).forEach(function(e){e.classList.add('rv')});
+var t=q('.rv, article h2, .tw');
+if(!('IntersectionObserver' in window)){t.forEach(function(e){e.classList.add('in')})}else{
+var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});t.forEach(function(e){o.observe(e)});
+
+/* Active section in contents */
+var links={};q('.toc a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+var hs=[].slice.call(q('article h2[id]'));
+function spy(){var cur=hs[0],y=innerHeight*.3;hs.forEach(function(h){if(h.getBoundingClientRect().top<y)cur=h});for(var k in links)links[k].classList.toggle('act',k===cur.id)}
+var sp=false;addEventListener('scroll',function(){if(!sp){sp=true;requestAnimationFrame(function(){sp=false;spy()})}},{passive:true});spy();
+
+/* Replay hero bars when the chart comes back into view */
+var fg=document.querySelector('header figure'),was=true;
+new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!was){q('header svg .bar,header svg text').forEach(function(x){x.style.animation='none';void x.getBoundingClientRect();x.style.animation=''})}was=e.isIntersecting})},{threshold:.5}).observe(fg)}
+
+/* Count-up stats */
+q('[data-count]').forEach(function(b){if(RM)return;var n=parseFloat(b.dataset.count),dec=+(b.dataset.dec||0),pre=b.dataset.pre||'',suf=b.dataset.suf||'',t0=null,delay=650,dur=1400;
+function f(v){return pre+v.toFixed(dec)+suf}b.textContent=f(0);
+function step(ts){if(t0===null)t0=ts;var p=Math.min(Math.max((ts-t0-delay)/dur,0),1),e=1-Math.pow(1-p,4);b.textContent=f(n*e);if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)});
+
+/* Feedback loop */
+var T={1:'Each campus gets its own assessment of water source, power demand, heat, and combined effects before major construction.',2:'The facility files water, efficiency, and renewable targets set for that site, not copied from another country.',3:'Host communities and LGUs get plain-language information and a way to raise concerns, with written answers on record.',4:'Actual water and power use are reported publicly and compared with the plan at regular intervals.',5:'If use drifts from the plan, the facility fixes it, and the next tranche waits until the conditions are met.'};
+var st=document.getElementById('step');
+q('.node').forEach(function(n){n.setAttribute('aria-pressed','false');function go(){q('.node').forEach(function(x){x.classList.remove('on');x.setAttribute('aria-pressed','false')});n.classList.add('on');n.setAttribute('aria-pressed','true');st.innerHTML='<strong>Step '+n.dataset.i+'. '+n.getAttribute('aria-label').split(': ')[1]+'</strong>'+T[n.dataset.i];st.classList.remove('flash');void st.offsetWidth;st.classList.add('flash')}
+n.addEventListener('click',go);n.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
+
+/* Sortable evaluation table */
+var tbd=document.querySelector('#eval ~ .tw tbody');if(tbd){var rows=[].slice.call(tbd.rows);rows.forEach(function(r,i){r.dataset.o=i});
+var L=function(c){var k=c.querySelector('.lv').className;return k.indexOf('l3')>-1?3:k.indexOf('l2')>-1?2:1};
+q('.sort button').forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.k;q('.sort button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+var before=[].slice.call(tbd.rows);
+rows.slice().sort(function(a,c){return k==='0'?a.dataset.o-c.dataset.o:(L(c.cells[k])-L(a.cells[k]))||(a.dataset.o-c.dataset.o)}).forEach(function(r){tbd.appendChild(r)});
+[].slice.call(tbd.rows).forEach(function(r,i){if(before[i]!==r){r.classList.remove('moved');void r.offsetWidth;r.classList.add('moved')}});
+q('td',tbd).forEach(function(c){c.classList.toggle('hl',k!=='0'&&c.cellIndex==k)})})})}
+})();</script>
+<script async src="/.netlify/scripts/ar" data-netlify-deploy-id="6aeb3bd2a08f2b7cd33558ec" data-netlify-site-id="878a8456-f0a7-4f63-8a41-15971590eaf1" data-agent-runner-id="6aeb3a27ad4f38f234501d0a"></script>
+</body>
+</html>
