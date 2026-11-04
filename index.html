@@ -75,11 +75,6 @@ h1 .sub{display:block;margin-top:.9rem;font:500 clamp(1.05rem,1.8vw,1.3rem)/1.4 
 .by{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
 .by .av{width:2.4rem;height:2.4rem;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--bg);font:700 .85rem var(--f-ui)}
 .by b{display:block;font:600 .98rem/1.3 var(--f-ui);color:var(--ink)}
-.dl{display:inline-flex;align-items:center;gap:.5rem;margin-left:auto;padding:.65rem 1.1rem;border-radius:999px;background:var(--ink);color:var(--bg);font:600 .88rem/1 var(--f-ui);text-decoration:none;box-shadow:var(--shadow);transition:transform .25s var(--ease),background .2s,color .2s}
-.dl:hover{color:var(--bg);background:var(--aqua);transform:translateY(-2px)}.dl:active{transform:scale(.96)}
-.dl svg{width:1.05rem;height:1.05rem;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-@media(max-width:34rem){.dl{margin-left:0;width:100%;justify-content:center}}
-@media print{.dl{display:none}}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:2.2rem 0 0;padding:0;list-style:none;box-shadow:var(--shadow)}
 .stats li{background:var(--card);padding:1rem 1.1rem}
 .stats b{display:block;font:600 clamp(1.5rem,3vw,2.1rem)/1.1 var(--f-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
@@ -224,7 +219,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 <p class="kicker rise" style="--d:0">Final Output · Globalization issue · Term 1 AY 2026–2027</p>
 <h1 class="rise" style="--d:1">Where <em>Growth</em> Meets <em>Sustainability</em><span class="vh">: </span><span class="sub">An Evidence-Based Framework for Data Center and AI Infrastructure Development in the Philippines</span></h1>
 <p class="lede rise" style="--d:2">How the Philippines can join the global AI buildout without letting data centres outrun its grid, its water, and its communities.</p>
-<div class="by rise" style="--d:3"><span class="av" aria-hidden="true">CM</span><p class="meta" style="margin:0"><b>Charles Mikael Medel</b>Mapúa-Malayan Digital College</p><a class='dl' download='where-growth-meets-sustainability.html' href='/'><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>
+<div class="by rise" style="--d:3"><span class="av" aria-hidden="true">CM</span><p class="meta" style="margin:0"><b>Charles Mikael Medel</b>Mapúa-Malayan Digital College</p></div>
 <ul class="stats rise" style="--d:4" aria-label="Key figures">
 <li><b data-count="50" data-suf=" MW">50 MW</b><span>AI-oriented capacity today</span></li>
 <li><b data-count="1.5" data-dec="1" data-suf=" GW">1.5 GW</b><span>Planned by 2033</span></li>
@@ -328,7 +323,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 
 </article>
 </main>
-<footer><div class="wrap"><span>Charles Mikael Medel · Mapúa-Malayan Digital College</span><span>Final Output · Term 1 AY 2026–2027 · <a download='where-growth-meets-sustainability.html' href='/'>Download this page (HTML)</a></span></div></footer>
+<footer><div class="wrap"><span>Charles Mikael Medel · Mapúa-Malayan Digital College</span><span>Final Output · Term 1 AY 2026–2027</span></div></footer>
 <script>(function(){
 var d=document.documentElement,q=function(x,r){return (r||document).querySelectorAll(x)},RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 d.classList.add('js');
@@ -387,6 +382,7 @@ rows.slice().sort(function(a,c){return k==='0'?a.dataset.o-c.dataset.o:(L(c.cell
 [].slice.call(tbd.rows).forEach(function(r,i){if(before[i]!==r){r.classList.remove('moved');void r.offsetWidth;r.classList.add('moved')}});
 q('td',tbd).forEach(function(c){c.classList.toggle('hl',k!=='0'&&c.cellIndex==k)})})})}
 })();</script>
-<script async src="/.netlify/scripts/ar" data-netlify-deploy-id="6aeb3bd2a08f2b7cd33558ec" data-netlify-site-id="878a8456-f0a7-4f63-8a41-15971590eaf1" data-agent-runner-id="6aeb3a27ad4f38f234501d0a"></script>
 </body>
 </html>
+<script async src="/.netlify/scripts/ar" data-netlify-deploy-id="6aeb3b3cfefc61a89d6ed72f" data-netlify-site-id="878a8456-f0a7-4f63-8a41-15971590eaf1" data-agent-runner-id="6aeb3a27ad4f38f234501d0a"></script>
+<script async src="/.netlify/scripts/hud?variant=owner-private" data-nf-variant="owner-private" data-netlify-site-id="878a8456-f0a7-4f63-8a41-15971590eaf1" data-app-host="app.netlify.com"></script>
